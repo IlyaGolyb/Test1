@@ -8,22 +8,43 @@
     </head>
 
     <body>
+
+      <!--Верхний блок-->
       <header class="header">
         <p>TEXT</p>
       </header>
 
       <main class="container">
 
+        <!--Цетральные три блока-->
         <div class="row top-row">
           <div class="box side-panel"></div>
-          <div class="box main-panel"></div>
+          
+          <div class="box main-panel">
+            <div class="counter-wrapper">
+              <span class="counter-value">0</span>
+              <button onclick="incrementCounter(this)">Увеличить</button>
+            </div>
+
+            <!--Скрипт кнопки счётчика-->
+            <script>
+            function incrementCounter(button) {
+            const wrapper = button.closest('.counter-wrapper');
+            const counter = wrapper.querySelector('.counter-value');
+            let currentValue = parseInt(counter.textContent, 10);
+            counter.textContent = currentValue + 1;
+            }
+            </script>
+          </div>
           <div class="box side-panel"></div>
         </div>
 
+        <!--Нижний предпоследний блок-->
         <div class="row">
           <div class="box full-width-panel"></div>
         </div>
 
+        <!--Нижние блоки-->
         <div class="row bottom-row">
           <div class="box small-box"></div>
           <div class="box small-box"></div>

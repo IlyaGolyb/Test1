@@ -4,6 +4,7 @@ body {
     margin: 20px;
 }
 
+/*Блоки*/
 .header {
     background-color: #6efff8; 
     padding: 15px;
@@ -52,4 +53,22 @@ body {
 
 .small-box {    
     flex-grow: 1; 
+}
+
+/*Счётчик с кнопкой*/
+.counter-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 100px;
+  gap: 10px;
+  flex-direction: column;
+  font-size: 1.2rem;
+  translate: 50px, 100px;
+}
+
+.counter-wrapper button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #ff6e6e; 
 }
