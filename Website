@@ -1,0 +1,110 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp (
+      title: 'Сайт',
+      home: Scaffold (
+        body: SingleChildScrollView (
+          child: Column (
+            children: [
+              
+              // Верхний блок
+              Container (
+                height: 100,
+                color: Color.fromARGB(255, 134, 175, 245),
+                child: Center (
+                  child: Text (
+                    'Hello!!!',
+                    style: TextStyle (
+                    fontSize: 24,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              
+              //Цетральный блок
+              Container (
+                height: 500,
+                child: Stack (
+                  alignment: Alignment.center,
+                  children: [
+                    
+                    //Настройка картинки
+                    Center (
+                      child: Image.network(
+                        'https://habrastorage.org/getpro/habr/post_images/3d4/4fd/84c/3d44fd84c57fc720db2210026836bd15.png',
+                        height: 150,
+                      ),
+                    ),
+
+                    //Кнопка
+                    Positioned (
+                      right: 16,
+                      top: 20,
+                      child: FloatingActionButton (
+                        onPressed: () { // Обработка нажатия
+                        },
+                        child: Icon(Icons.add),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              //Предпоследний блок
+              Container(
+                height: 120,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(5, (index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.blueAccent,
+                          child: IconButton(
+                            icon: Icon(Icons.star, color: Colors.white),
+                            onPressed: () {
+                              // Обработка нажатия
+                          }),
+                        ),
+                        SizedBox(height: 8),
+                        Text('Кнопка ${index + 1}'),
+                      ],
+                    );
+                  }),
+                ),
+              ),
+
+              //Нижний блок
+              Container(
+                height: 100,
+                color: Color.fromARGB(255, 134, 175, 245),
+                child: Center (
+                  child: Text (
+                    '2025',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
