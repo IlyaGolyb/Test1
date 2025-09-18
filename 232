@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Zapp Layout Example',
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Zapp Layout')),
+        body: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Левый контейнер (большой)
+              Container(
+                height: 300,
+                width: 250,
+                color: Colors.blue[100],
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Первый Row с двумя контейнерами
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 50,
+                            color: Colors.red,
+                            margin: const EdgeInsets.all(8),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 50,
+                            color: Colors.green,
+                            margin: const EdgeInsets.all(8),
+                          ),
+                        ],
+                      ),
+                      // Второй Row с двумя контейнерами
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 50,
+                            color: Colors.orange,
+                            margin: const EdgeInsets.all(8),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 50,
+                            color: Colors.purple,
+                            margin: const EdgeInsets.all(8),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 20), // Отступ между контейнерами
+
+              // Правый контейнер (меньше)
+              Container(
+                height: 200,
+                width: 100,
+                color: Colors.grey[400],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
