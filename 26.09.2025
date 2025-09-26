@@ -1,0 +1,244 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+// Данные для списков
+Map<int, Map<String, dynamic>> teachers = {
+  1: {
+    'position': 'Профессор',
+    'name': 'Иванов И.И.', 
+    'phone': '+7 (999) 123-45-67'
+  },
+  2: {
+    'position': 'Доцент',
+    'name': 'Петрова П.П.',
+    'phone': '+7 (999) 123-45-68'
+  },
+  3: {
+    'position': 'Старший преподаватель',
+    'name': 'Сидоров С.С.',
+    'phone': '+7 (999) 123-45-69'
+  }
+};
+
+Map<int, Map<String, dynamic>> subjects = {
+  1: {
+    'name': 'Математика',
+    'duration': 90,
+    'day': 'Понедельник'
+  },
+  2: {
+    'name': 'Физика',
+    'duration': 120,
+    'day': 'Вторник'
+  },
+  3: {
+    'name': 'Информатика', 
+    'duration': 60,
+    'day': 'Среда'
+  },
+  4: {
+    'name': 'Химия',
+    'duration': 90,
+    'day': 'Четверг'
+  }
+};
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Учебная система',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MainMenuPage(),
+    );
+  }
+}
+
+// Главная страница с двумя кнопками
+class MainMenuPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Главное меню'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Кнопка для списка преподавателей
+            Container(
+              width: 200,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TeachersListPage()),
+                  );
+                },
+                child: Text('Преподаватели', style: TextStyle(fontSize: 18)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              ),
+            ),
+            
+            SizedBox(height: 30),
+            
+            // Кнопка для списка предметов
+            Container(
+              width: 200,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubjectsListPage()),
+                  );
+                },
+                child: Text('Предметы', style: TextStyle(fontSize: 18)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Страница со списком преподавателей с использованием вашего кода
+class TeachersListPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Список преподавателей'),
+        backgroundColor: Colors.green,
+      ),
+      body: Column(
+        children: [
+          // Заголовок
+          Container(
+            padding: EdgeInsets.all(16),
+            color: Colors.green[50],
+            child: Row(
+              children: [
+                Icon(Icons.person, color: Colors.green),
+                SizedBox(width: 10),
+                Text(
+                  'Преподаватели (${teachers.length})',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          
+          // Список преподавателей с использованием вашего кода
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...List.generate(teachers.length, (index) {
+                    // Получаем ключ по индексу
+                    final key = teachers.keys.elementAt(index);
+                    final teacher = teachers[key];
+                    
+                    return Card(
+                      margin: EdgeInsets.all(8),
+                      child: ListTile(
+                        leading: Icon(Icons.person, color: Colors.green),
+                        title: Text(
+                          teacher?['name'] ?? 'Неизвестно',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Должность: ${teacher?['position'] ?? ''}'),
+                            Text('Телефон: ${teacher?['phone'] ?? ''}'),
+                          ],
+                        ),
+                        trailing: Icon(Icons.phone, color: Colors.blue),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Страница со списком предметов с использованием вашего подхода
+class SubjectsListPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Список предметов'),
+        backgroundColor: Colors.orange,
+      ),
+      body: Column(
+        children: [
+          // Заголовок
+          Container(
+            padding: EdgeInsets.all(16),
+            color: Colors.orange[50],
+            child: Row(
+              children: [
+                Icon(Icons.book, color: Colors.orange),
+                SizedBox(width: 10),
+                Text(
+                  'Предметы (${subjects.length})',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          
+          // Список предметов с использованием вашего подхода
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...List.generate(subjects.length, (index) {
+                    // Получаем ключ по индексу
+                    final key = subjects.keys.elementAt(index);
+                    final subject = subjects[key];
+                    
+                    return Card(
+                      margin: EdgeInsets.all(8),
+                      child: ListTile(
+                        leading: Icon(Icons.book, color: Colors.orange),
+                        title: Text(
+                          subject?['name'] ?? 'Неизвестно',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Длительность: ${subject?['duration']} мин'),
+                            Text('День: ${subject?['day'] ?? ''}'),
+                          ],
+                        ),
+                        trailing: Icon(Icons.schedule, color: Colors.purple),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
