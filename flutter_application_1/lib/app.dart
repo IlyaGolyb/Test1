@@ -39,9 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _addProfile() async {
     if (_nameController.text.isEmpty || _emailController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Пожалуйста, заполните все поля')),
-      );
+      _showSnackBar('Пожалуйста, заполните все поля');
       return;
     }
 
@@ -61,17 +59,19 @@ class _HomeScreenState extends State<HomeScreen> {
       _nameController.clear();
       _emailController.clear();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Профиль успешно добавлен')),
-      );
+      if (mounted) {
+        _showSnackBar('Профиль успешно добавлен');
+      }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Ошибка: $e')),
-      );
+      if (mounted) {
+        _showSnackBar('Ошибка: $e');
+      }
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -90,18 +90,26 @@ class _HomeScreenState extends State<HomeScreen> {
         _profiles = (response as List).cast<Map<String, dynamic>>();
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Загружено ${_profiles.length} профилей')),
-      );
+      if (mounted) {
+        _showSnackBar('Загружено ${_profiles.length} профилей');
+      }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Ошибка загрузки: $e')),
-      );
+      if (mounted) {
+        _showSnackBar('Ошибка загрузки: $e');
+      }
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
